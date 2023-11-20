@@ -2,7 +2,7 @@
  * Student class
  *
  * @author (Liam Kelly, 22346317)
- * @version (20/11/2023)
+ * @version (v1)
  */
 public class Student extends Person
 {

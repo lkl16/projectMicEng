@@ -2,7 +2,7 @@
  * Persons within the module
  *
  * @author (Liam Kelly, 22346317)
- * @version (20/11/23)
+ * @version (v1)
  */
 import java.io.BufferedReader;
 import java.io.IOException;
