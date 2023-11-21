@@ -1,41 +1,43 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.*;  
+import java.util.Scanner; 
 /**
  * Persons within the module
  *
  * @author (Liam Kelly, 22346317)
- * @version (v1)
+ * @version (2.0)
  */
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.FileReader;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 public class Person
 {
     private String firstName;
     private String lastName;
-    public Person(String firstName, String lastName)
+    public Person(String firstName, String lastName) //setup the first/last name of the person
     { 
         this.firstName=firstName;
         this.lastName=lastName;
     }
-    public String getEntry(int studentNum,String password){
-        
-        
-        return "";
-    }
-    
-    public String addEntry(String moduleName,int studentNum, String status,String grade){
-        String filePath = moduleName;
-        filePath=filePath.replaceAll(" ","")+".csv";
-        
-         // Student information to be added
-        String[] studentInfo = {""+countEntries(filePath), ""+studentNum, firstName, lastName,status,moduleName,grade, ""+gradeToPoints(grade)};
 
-        
-        return "Successfully Added Entry";
+    public String getEntry(int studentNum,String password,String moduleName){
+        String currentLine; //the current line of the csv
+        try (BufferedReader br = new BufferedReader(new FileReader("file.txt"))) {
+            //go through each line in the 
+            for (int i = 0; i < countEntries(moduleName.replaceAll(" ","")+".csv"); i++){
+                currentLine=br.readLine();//set currentline to the line we just read
+                if(currentLine.split(",")[2].equals(studentNum+"")){//check if id in csv matches the id we're looking for
+                    return currentLine;//id found, return line
+                }
+            }
+            return "Id was not found";//if id doesnt exist
+        } 
+        catch(IOException e){
+            System.out.println(e); //error catch
+        }
+        return "Error??";//shouldnt get to here, but just in case
     }
-    
-    public static int countEntries(String filePath) {
+
+    public int countEntries(String filePath) {
         int count = 0;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
@@ -47,36 +49,16 @@ public class Person
         }
         return count;
     }
-    
-    public static void writeCSV(String filePath, String[] data) {
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true));
 
-            // Creating a string with CSV format
-            StringBuilder csvEntry = new StringBuilder();
-            for (String value : data) {
-                csvEntry.append(value).append(",");
-            }
-            csvEntry.deleteCharAt(csvEntry.length() - 1); // Remove the trailing comma
-
-            writer.write(csvEntry.toString());
-            writer.newLine(); // Move to the next line for the next entry
-
-            writer.close();
-            System.out.println("Entry added to the CSV file successfully!");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public String addEntry(String moduleName, String grade){
+        return "Failure";
     }
-    
-    public int gradeToPoints(String grade){
-        int points = 0;
-        if(grade.toUpperCase().equals("A1")){
-            
-        }
-        //do this for each possible grade
-        return points;
+
+    public String getFirstName(){
+        return firstName;
     }
-    
+
+    public String getLastName(){
+        return lastName;
+    }
 }
