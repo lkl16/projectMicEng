@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import java.lang.System;
+
 /**
  * Student class
  *
@@ -20,8 +20,10 @@ public class Faculty extends Person
     }
     
     @Override //overriding getEntry in Person.
-    public String getEntry(int studentNum,String moduleName){
-        return super.getEntry(studentNum,moduleName);//if password is right, go to the getEntry in Person
+    public String getEntry(int studentNum,String password,String moduleName){
+        if(password.equals(this.password)){
+            return super.getEntry(studentNum,password,moduleName);//if password is right, go to the getEntry in Person
+        }
+        return "You did not enter the correct password. Exiting...";
     }
-    
 }

@@ -15,40 +15,9 @@ public class Module
     {
         this.moduleName=name;
         classList=new ArrayList<Student>();
-        //staffList=new ArrayList<Faculty>();
+        staffList=new ArrayList<Faculty>();
     }
-
-    
-    
-    public double getStudentGrade(Student student){
-        String myEntry = student.getEntry(moduleName);
-        if(myEntry != null&&!myEntry.equals("Err: Couldn't get Student ID")){ 
-            String[] moduleInfo = myEntry.split(",");
-            return Double.parseDouble(moduleInfo[5]);
-        }
-        else return -1.0;
-    }
-    public double getStudentGrade(int ID){
-        for(Student i:classList){
-            if(i.getId() == ID){
-                return getStudentGrade(i);
-            }
-        }
-        return -1.0;
-    }
-    
-    
-    
-    
-    
-    
     public String getName(){
         return moduleName;
-    }
-    public ArrayList<Student> getClassList(){
-        return classList;
-    }
-    public ArrayList<Faculty> getFacultyList(){
-        return staffList;
     }
 }
