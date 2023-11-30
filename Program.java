@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 import java.lang.System;
 /**
- * Write a description of class Program here.
+ * Program Class
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author (Liam Kelly,22346317)
+ * @version v7
  */
 public class Program
 {
@@ -32,12 +32,29 @@ public class Program
             }
         }
     }
-
+    
     public void createModule(int year, int semester,String moduleName){
         years.get(year).get(semester).add(new Module(moduleName));        
     }
     public void addModule(int year, int semester,Module module){
         years.get(year).get(semester).add(module);
+    }
+    public void addStudent(Module module, Student student){
+        module.addStudent(student);
+        studentList.add(student);
+    }
+    public void addStaff(Faculty faculty, Module module){
+        module.addStaff(faculty);
+        staffList.add(faculty);
+    }
+    public void removeModule(Module module){
+        for(ArrayList<ArrayList<Module>> semester: years){
+            for(ArrayList<Module> Modules:semester){
+                if(Modules.contains(module)){
+                    Modules.remove(module);
+                }
+            }
+        }
     }
     public void getStudents(){
         for(ArrayList<ArrayList<Module>> i: years){
@@ -192,7 +209,23 @@ public class Program
         }
         return QCA/(counter);
     }
-       
+    public String getTranscript(Student student){
+        String outString="";
+        ArrayList<Module> allModules=getModuleList();
+        boolean infoGot =false;
+        int counter=1;
+        for(Module i:allModules){
+            if(i.getClassList().contains(student)&&!infoGot){
+                outString=outString+i.getStudentInfo(student);
+                
+            }
+            if(i.getClassList().contains(student)){
+                outString=outString+String.format("\nModule %d: %s",counter,i.getStudentTranscript(student));
+                counter++;
+            }
+        }
+        return outString;
+    }
     
     
     
@@ -223,6 +256,9 @@ public class Program
     }
     public ArrayList<Student> getStudentList(){
         return studentList;
+    }
+    public ArrayList<Faculty> getStaffList(){
+        return staffList;
     }
     public int getDuration(){
         return duration;

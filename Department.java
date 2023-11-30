@@ -5,22 +5,24 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * Write a description of class Department here.
+ * Department Class
  *
- * @author Liam Kelly 22346317
- * @version 1.0
+ * @author (Liam Kelly,22346317)
+ * @version v7
  */
 public class Department
 {
     private String name;
     private ArrayList<Program> programs;
     private ArrayList<Student> studentList;
+    private ArrayList<Faculty> staffList;
     private ArrayList<Module> moduleList;
     public Department(String name){
         this.name=name;
         this.programs=new ArrayList<Program>();
         this.studentList=new ArrayList<Student>();
         this.moduleList=new ArrayList<Module>();
+        this.staffList=new ArrayList<Faculty>();
     }
     public void addProgram(Program program){
         programs.add(program);
@@ -28,6 +30,15 @@ public class Department
     public void addModule(Module module,Program program,int year,int semester){
         moduleList.add(module);
         programs.get(programs.indexOf(program)).addModule(year,semester,module);
+    }
+    public void addStudent(Student student){
+        studentList.add(student);
+    }
+    public void addStaff(Faculty faculty){
+        staffList.add(faculty);
+    }
+    public void removeProgram(Program program){
+        programs.remove(program);
     }
     public void examBoardModule(double cutoffQCA, Module module,Program program){
         if(!program.getModuleList().contains(module)){
@@ -44,7 +55,7 @@ public class Department
 
     public void examBoardSemester(double cutoffQCA, int semester, int year,Program program){
 
-        if(year>program.getDuration() || (semester-1)>1){
+        if(year>program.getDuration() || (semester-1)>1||(semester-1)<0||year<0){
             System.out.println("Error, this semester is not in this program.");
         }
         else{
@@ -64,7 +75,7 @@ public class Department
     }
 
     public void examBoardYear(double cutoffQCA, int year,Program program){
-        if(year>program.getDuration()){
+        if(year>program.getDuration()||program.getDuration()<0){
             System.out.println("Error, this year is not in this program.");
         }
         else{
@@ -114,4 +125,5 @@ public class Department
     public ArrayList<Program> getPrograms(){
         return programs;
     }
+    
 }

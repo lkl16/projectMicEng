@@ -5,10 +5,10 @@ import java.io.*;
 import java.util.Scanner; 
 import java.lang.System;
 /**
- * Persons within the module
+ * Persons Class
  *
- * @author (Liam Kelly, 22346317)
- * @version (2.0)
+ * @author (Liam Kelly,22346317)
+ * @version v7
  */
 public class Person
 {
@@ -59,7 +59,7 @@ public class Person
         }
         return count;
     }
-    public String addEntry(String moduleName, String grade){
+    public String addEntry(String moduleName, String grade,Student student){
         return "Failure";
     }
     public String getFirstName(){
