@@ -22,7 +22,13 @@ public class Department
         this.studentList=new ArrayList<Student>();
         this.moduleList=new ArrayList<Module>();
     }
-
+    public void addProgram(Program program){
+        programs.add(program);
+    }
+    public void addModule(Module module,Program program,int year,int semester){
+        moduleList.add(module);
+        programs.get(programs.indexOf(program)).addModule(year,semester,module);
+    }
     public void examBoardModule(double cutoffQCA, Module module,Program program){
         if(!program.getModuleList().contains(module)){
             System.out.println("Error, this module is not in this program.");
@@ -102,5 +108,10 @@ public class Department
             e.printStackTrace();
         }
     }
-
+    public String getName(){
+        return name;
+    }
+    public ArrayList<Program> getPrograms(){
+        return programs;
+    }
 }
