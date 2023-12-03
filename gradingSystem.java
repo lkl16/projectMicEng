@@ -915,7 +915,7 @@ class gradingSystem {
             boolean found =false;
             Student student = new Student(0,"","");
             for(Student i:students){
-                if(id==i.getId()&& lastName==i.getLastName()){
+                if(id==i.getId()&& lastName.equals(i.getLastName())){
                     student = i;
                     found=true;
                 }
